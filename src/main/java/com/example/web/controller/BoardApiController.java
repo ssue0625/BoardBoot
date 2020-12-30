@@ -35,12 +35,11 @@ class BoardApiController {
 	@GetMapping("/boards")
 	List<Board> all(@RequestParam(required = false, defaultValue = "") String title,
 			@RequestParam(required = false, defaultValue = "") String content) {
-		if (!StringUtils.hasText(title) && !StringUtils.hasText(title)) {
+		if (!StringUtils.hasText(title) && !StringUtils.hasText(content)) {
 			return repository.findAll();
 		} else {
 			return repository.findByBtitleOrBcontent(title, content);
 		}
-
 	}
 
 	@PostMapping("/boards")
@@ -61,6 +60,8 @@ class BoardApiController {
 			board.setBwriter(newBoard.getBwriter());
 			board.setBtitle(newBoard.getBtitle());
 			board.setBcontent(newBoard.getBcontent());
+			board.setBdate(newBoard.getBdate());
+			board.setBpassword(newBoard.getBpassword());
 			return repository.save(board);
 		}).orElseGet(() -> {
 			newBoard.setBno(bno);
