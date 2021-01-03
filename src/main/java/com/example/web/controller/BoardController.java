@@ -50,12 +50,12 @@ public class BoardController {
 	}
 
 	@GetMapping("/list")
-	public String list(Model model, @PageableDefault(size = 2) Pageable pageable) {
+	public String list(Model model, @PageableDefault(value = 20) Pageable pageable) {
 		// List<Board> board = boardRepository.findAll();
 		// boardRepository.findAll(PageRequest.of(page:조회할 페이지 번호, size:한 페이지 당 조회 갯수));
 		Page<Board> board = boardRepository.findAll(pageable);
-		int startPage = Math.max(1, board.getPageable().getPageNumber() - 4);
-		int endPage = Math.max(board.getTotalPages(), board.getPageable().getPageNumber() + 4);
+		int startPage = Math.max(1, board.getPageable().getPageNumber() - 10);
+		int endPage = Math.min(board.getTotalPages(), board.getPageable().getPageNumber() + 10);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("board", board);
