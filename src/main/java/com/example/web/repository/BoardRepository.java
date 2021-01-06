@@ -11,4 +11,5 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 	List<Board> findByBtitle(String title); // 제목으로 검색
 
 	List<Board> findByBtitleOrBcontent(String title, String content); // 제목 && 내용 검색
+
 }

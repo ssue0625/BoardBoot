@@ -44,7 +44,11 @@ public class BoardController {
 			model.addAttribute("board", new Board());
 		} else {
 			Board board = boardRepository.findById(bno).orElse(null);
+			int hitcount = board.getHitcount();
+			hitcount = hitcount + 1;
+			board.setHitcount(hitcount);
 			model.addAttribute("board", board);
+			boardRepository.save(board); // 조회수 저장
 		}
 		return "writeBoardForm";
 	}
@@ -54,6 +58,7 @@ public class BoardController {
 		// List<Board> board = boardRepository.findAll();
 		// boardRepository.findAll(PageRequest.of(page:조회할 페이지 번호, size:한 페이지 당 조회 갯수));
 		Page<Board> board = boardRepository.findAll(pageable);
+
 		int startPage = Math.max(1, board.getPageable().getPageNumber() - 10);
 		int endPage = Math.min(board.getTotalPages(), board.getPageable().getPageNumber() + 10);
 		model.addAttribute("startPage", startPage);
