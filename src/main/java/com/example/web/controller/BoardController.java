@@ -50,7 +50,7 @@ public class BoardController {
 			model.addAttribute("board", board);
 			boardRepository.save(board); // 조회수 저장
 		}
-		return "writeBoardForm";
+		return "board/writeBoardForm";
 	}
 
 	@GetMapping("/list")
@@ -64,7 +64,7 @@ public class BoardController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("board", board);
-		return "boardList";
+		return "board/boardList";
 	}
 
 }

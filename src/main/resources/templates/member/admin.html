@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>관리자 페이지입니다.</h1>
+    <hr>
+    	<div sec:authentication="principal.authorities"></div>
+    	<a th:href="@{'/'}">메인</a>
+</body>
+</html>
