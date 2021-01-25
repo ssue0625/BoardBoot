@@ -1,43 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('게시판')">
+<!-- Required meta tags -->
 <meta charset="UTF-8">
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<!-- Custom styles for this template -->
+<link href="starter-template.css" th:href="@{/css/starter-template.css}" rel="stylesheet">
+<title>게시판</title>
 </head>
 <body>
-	<h1>게시판</h1>
-	<form method="post" action="#" th:action="@{/writeBoardForm}" th:object="${board}">
-		<input type="hidden" th:field="*{bno}"/> 
-		<div class="form-group">
-	    	<label for="btitle">제목</label>
-	    	<input id="btitle" th:field="*{btitle}" type="text" class="form-control" placeholder="제목을 입력하세요">
-	    </div>
-	    <div class="form-group">
-	   		<label for="bwriter">작성자</label>
-	    	<input id="bwriter" th:field="*{bwriter}" type="text" class="form-control" placeholder="작성자를 입력하세요">
-	  	</div>
-	  	<div class="form-group">
-	    	<label for="bcontent">내용</label>
-	    	<textarea id="bcontent" th:field="*{bcontent}" class="form-control" rows="3" placeholder="내용을 입력하세요"></textarea>
-	  	</div>
-	  	<div class="form-group">
-	  		<label for="bpassword">비밀번호</label>
-	  		<input id="bpassword" th:field="*{bpassword}" type="password" class="form-control" placeholder="비밀번호를 입력하세요"
-	  				th:classappend="${#fields.hasErrors('bpassword')} ? 'is-invalid'">
-            <div class="invalid-feedback" th:if="${#fields.hasErrors('bpassword')}" th:errors="*{bpassword}">
-            	비밀번호 에러
-            </div>		
-	  	</div>
-	  	<div class="form-group">
-	  		<input type="submit" class="btn btn-default" value="작성하기"/> 
-	  		<a class="btn btn-default" th:href="@{/list}" type="button">취소</a>
-	  	</div>
-	</form>
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>		
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('board')"></nav>
+	<div class="container">
+		<h2>게시판</h2>
+		<form method="post" action="#" th:action="@{/writeBoardForm}" th:object="${board}">
+			<input type="hidden" th:field="*{bno}" />
+			<div class="form-group">
+				<label for="btitle">제목</label> 
+				<input id="btitle" th:field="*{btitle}" type="text" class="form-control" placeholder="제목을 입력하세요">
+			</div>
+			<div class="form-group">
+				<label for="bwriter">작성자</label> 
+				<input id="bwriter" th:field="*{bwriter}" type="text" class="form-control" placeholder="작성자를 입력하세요">
+			</div>
+			<div class="form-group">
+				<label for="bcontent">내용</label>
+				<textarea id="bcontent" th:field="*{bcontent}" class="form-control" rows="3" placeholder="내용을 입력하세요"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="bpassword">비밀번호</label> 
+				<input id="bpassword" th:field="*{bpassword}" type="password" class="form-control" placeholder="비밀번호를 입력하세요" 
+						th:classappend="${#fields.hasErrors('bpassword')} ? 'is-invalid'">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('bpassword')}" th:errors="*{bpassword}">
+					비밀번호 에러
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-secondary" value="작성하기" /> 
+				<a class="btn btn-secondary" th:href="@{/list}" type="button">취소</a>
+			</div>
+		</form>
+	</div>
+
+	<!-- Optional JavaScript; choose one of the two! -->
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+	<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
 </body>
 </html>

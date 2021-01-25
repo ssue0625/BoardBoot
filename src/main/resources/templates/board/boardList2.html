@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>게시판</h1>
+	<table class="table table-bordered table-hover table-condensed">
+		<thead>
+			<tr>
+				<th scope="col">글번호</th>
+				<th scope="col">제목</th>
+				<th scope="col">작성자</th>
+				<th scope="col">날짜</th> 
+				<th scope="col">조회수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="board : ${board}">
+				<td th:text="${board.bno}"></td>
+				<td><a th:text="${board.btitle}" th:href="@{/writeBoardForm(bno=${board.bno})}"></a></td>
+				<td th:text="${board.bwriter}"></td>
+				<td th:text="${#dates.format(board.bdate, 'yyyy-MM-dd')}"></td>
+				<td th:text="${board.hitcount}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item" th:classappend="${1 == board.pageable.pageNumber + 1} ? 'disabled'" >
+	      <a class="page-link" th:href="@{/list(page=${board.pageable.pageNumber -1})}" tabindex="-1" aria-disabled="true">이전</a>
+	    </li>
+	    <li class="page-item" th:classappend="${i == board.pageable.pageNumber + 1} ? 'disabled'" th:each="i : ${#numbers.sequence(startPage, endPage)}">
+	    	<a class="page-link" href="#" th:href="@{/list(page=${i -1})}" th:text="${i}">1</a>
+	    </li>
+	    <li class="page-item" th:classappend="${board.totalPages == board.pageable.pageNumber + 1} ? 'disabled'" >
+	      <a class="page-link" th:href="@{/list(page=${board.pageable.pageNumber +1})}">다음</a>
+	    </li>
+	  </ul>
+	</nav>	
+	<div class="text-left">
+		<a class="btn btn-default" th:href="@{/writeBoardForm}" type="button">글 쓰기</a>
+	</div>	
+	<hr>
+	<a class="btn btn-default" th:href="@{/}" type="button">메인</a>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>		
+</body>
+</html>

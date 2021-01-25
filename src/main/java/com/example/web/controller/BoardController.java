@@ -32,7 +32,7 @@ public class BoardController {
 	public String writeBoardForm(@Validated Board board, BindingResult bindingResult) {
 		BoardValidator.validate(board, bindingResult);
 		if (bindingResult.hasErrors()) {
-			return "writeBoardForm";
+			return "board/writeBoardForm";
 		}
 		boardRepository.save(board);
 		return "redirect:/list";

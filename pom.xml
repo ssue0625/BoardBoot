@@ -12,7 +12,7 @@
 	<artifactId>BoardBoot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BoardBoot</name>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
